@@ -109,36 +109,18 @@ namespace Pantheon.Framework.Executors
                 await _flowStorage.UpdateFlowRunStatusAsync(flowRunId, FlowRunStatus.Running);
 
                 // Create a context for the flow
-                var contextType = typeof(FlowRunContext<>).MakeGenericType(flow.ResultType);
-                var context = Activator.CreateInstance(contextType);
+                var context = new FlowRunContext<object>();
 
-                // Use reflection to run the flow method
-                var method = flow.GetType().GetMethod("RunAsync");
-                if (method == null)
-                {
-                    throw new InvalidOperationException("Flow does not have a RunAsync method");
-                }
-
-                var methodResult = method.Invoke(flow, new object[] { input, context });
-                
-                // Get the async enumerable result
-                var asyncEnumerable = methodResult as IAsyncEnumerable<object>;
-                if (asyncEnumerable == null)
-                {
-                    throw new InvalidOperationException("Flow.RunAsync did not return an IAsyncEnumerable<object>");
-                }
-
-                // Enumerate through the elements
-                await foreach (var element in asyncEnumerable.WithCancellation(cancellationToken))
+                // Execute the flow and collect elements
+                await foreach (var element in flow.RunAsync(input, context).WithCancellation(cancellationToken))
                 {
                     // Save each element
                     var flowElement = new FlowElement(flowRunId, element);
                     await _flowStorage.SaveFlowElementAsync(flowElement);
                 }
 
-                // Get the result from the context using reflection
-                var resultProperty = contextType.GetProperty("Result");
-                object? contextResult = resultProperty?.GetValue(context);
+                // Get the result from the context
+                object? contextResult = context.Result;
 
                 // Update flow status to completed
                 await _flowStorage.UpdateFlowRunStatusAsync(flowRunId, FlowRunStatus.Completed);
