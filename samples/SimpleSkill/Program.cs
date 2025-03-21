@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -44,7 +44,7 @@ namespace SimpleSkill
             // Set up a simple console logger
             using var loggerFactory = LoggerFactory.Create(builder =>
             {
-                builder.AddSimpleConsole(options => 
+                builder.AddSimpleConsole(options =>
                 {
                     options.IncludeScopes = true;
                     options.SingleLine = false;
@@ -52,7 +52,7 @@ namespace SimpleSkill
                 });
                 builder.SetMinimumLevel(LogLevel.Information);
             });
-            
+
             var logger = loggerFactory.CreateLogger<Program>();
             logger.LogInformation("Starting Simple Skill sample");
 
@@ -71,10 +71,10 @@ namespace SimpleSkill
             // Create the summarize template
             var templateContent = "Please summarize the following text:\n\n{{ Text }}\n\nProvide a concise summary:";
             var systemTemplateContent = "You are a helpful assistant that summarizes text.";
-            
-            var outputParser = new OutputParser<SummarizeResult>(response => 
+
+            var outputParser = new OutputParser<SummarizeResult>(response =>
                 new SummarizeResult { Summary = response });
-            
+
             var summarizeTemplate = new Template<SummarizeInput, SummarizeResult>(
                 "summarize",
                 templateContent,
@@ -83,12 +83,12 @@ namespace SimpleSkill
 
             // Create a template runner
             var templateRunner = new TemplateRunner(
-                llmClient, 
+                llmClient,
                 loggerFactory.CreateLogger<TemplateRunner>());
 
             // Create the summarize flow
             async IAsyncEnumerable<SummarizeElement> SummarizeFlowFunc(
-                FlowRunContext<SummarizeResult> context, 
+                FlowRunContext<SummarizeResult> context,
                 SummarizeInput input)
             {
                 // Yield an element for the first step
@@ -123,14 +123,20 @@ namespace SimpleSkill
             // Create the in-memory flow storage
             var flowStorage = new InMemoryFlowStorage();
 
-            // Create the in-memory executor
+            // Create a wrapper to adapt the specific flow to the generic interface
+            IFlow<object, object, object> CreateGenericFlow(IFlow<SummarizeInput, SummarizeElement, SummarizeResult> specificFlow)
+            {
+                return new GenericFlowAdapter(specificFlow);
+            }
+
+            // Create the in-memory executor with the wrapped flow
             var flows = new Dictionary<string, IFlow<object, object, object>>
             {
-                { "summarize", (IFlow<object, object, object>)summarizeFlow }
+                { "summarize", CreateGenericFlow(summarizeFlow) }
             };
             var executor = new InMemoryExecutor(
-                flowStorage, 
-                flows, 
+                flowStorage,
+                flows,
                 loggerFactory.CreateLogger<InMemoryExecutor>());
 
             try
@@ -138,7 +144,7 @@ namespace SimpleSkill
                 // Get input text
                 Console.WriteLine("Enter text to summarize (or press Enter to use sample text):");
                 string inputText = Console.ReadLine() ?? "";
-                
+
                 if (string.IsNullOrWhiteSpace(inputText))
                 {
                     inputText = "The quick brown fox jumps over the lazy dog. " +
@@ -198,6 +204,42 @@ namespace SimpleSkill
             // Wait for user input before exiting
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
+        }
+    }
+
+    /// <summary>
+    /// Adapter class to wrap a specific flow into the generic IFlow interface
+    /// </summary>
+    public class GenericFlowAdapter : IFlow<object, object, object>
+    {
+        private readonly IFlow<SummarizeInput, SummarizeElement, SummarizeResult> _specificFlow;
+
+        public GenericFlowAdapter(IFlow<SummarizeInput, SummarizeElement, SummarizeResult> specificFlow)
+        {
+            _specificFlow = specificFlow;
+        }
+
+        public string Name => _specificFlow.Name;
+        public Type InputType => _specificFlow.InputType;
+        public Type ElementType => _specificFlow.ElementType;
+        public Type ResultType => _specificFlow.ResultType;
+
+        public async IAsyncEnumerable<object> RunAsync(object input, FlowRunContext<object> context)
+        {
+            // Create a context for the specific flow type
+            var specificContext = new FlowRunContext<SummarizeResult>();
+            
+            // Run the specific flow
+            await foreach (var element in _specificFlow.RunAsync((SummarizeInput)input, specificContext))
+            {
+                yield return element;
+            }
+
+            // Copy the result to the generic context
+            if (specificContext.Result != null)
+            {
+                context.SetResult(specificContext.Result);
+            }
         }
     }
 }
