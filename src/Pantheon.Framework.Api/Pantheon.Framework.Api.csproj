@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pantheon.Framework.Core\Pantheon.Framework.Core.csproj" />
+    <ProjectReference Include="..\Pantheon.Framework.Executors\Pantheon.Framework.Executors.csproj" />
+    <ProjectReference Include="..\Pantheon.Framework.Storage\Pantheon.Framework.Storage.csproj" />
+  </ItemGroup>
+
+</Project>
