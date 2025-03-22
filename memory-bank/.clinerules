@@ -1,0 +1,42 @@
+# Pantheon Framework Project Rules
+
+## Project Naming Conventions
+- All core framework projects follow the naming pattern: `Pantheon.Framework.*`
+- Namespaces match project names precisely
+- Interface names begin with 'I' (e.g., IExecutor, IFlow)
+- Implementation classes have clear, descriptive names without prefixes
+
+## Code Style
+- Async methods always include the 'Async' suffix
+- Use of nullable reference types is encouraged
+- XML documentation on public APIs is required
+- Four-space indentation is used throughout the codebase
+
+## Implementation Patterns
+- Dependency injection is used for component composition
+- Interfaces are defined in the Core project
+- Implementations reside in their respective projects
+- Generic type constraints should use 'class' or 'struct' constraints when appropriate
+- Flow definitions should be immutable where possible
+
+## Error Handling
+- Exceptions should be meaningful and contain context information
+- Services should not catch exceptions unless they can be meaningfully handled
+- Flow execution errors should be captured and reported, not throw exceptions
+
+## Integration Points
+- Key integration interfaces:
+  - ILlmClient for integrating with AI providers
+  - IFlowStorage for persistent storage implementations
+  - IExecutor for customizing execution strategies
+
+## Testing Approach
+- Unit tests for each component in isolation
+- Integration tests for component interactions
+- Mock implementations for dependencies during testing
+- Test naming follows the pattern: [TestedMethod]_[Scenario]_[ExpectedOutcome]
+
+## Documentation Standards
+- XML documentation on all public APIs
+- README.md in each project explaining its purpose
+- Memory bank for high-level architectural decisions and project context
