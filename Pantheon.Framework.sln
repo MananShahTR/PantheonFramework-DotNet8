@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSkill", "samples\Simp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApplication", "samples\ChatApplication\ChatApplication.csproj", "{7ED1D440-077A-4444-895F-6D36A9B94D45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pantheon.Framework.FlowQueue", "src\Pantheon.Framework.FlowQueue\Pantheon.Framework.FlowQueue.csproj", "{1A110E6C-0F0E-4B75-8E3A-B7681759EE81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{7ED1D440-077A-4444-895F-6D36A9B94D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7ED1D440-077A-4444-895F-6D36A9B94D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7ED1D440-077A-4444-895F-6D36A9B94D45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A110E6C-0F0E-4B75-8E3A-B7681759EE81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A110E6C-0F0E-4B75-8E3A-B7681759EE81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A110E6C-0F0E-4B75-8E3A-B7681759EE81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A110E6C-0F0E-4B75-8E3A-B7681759EE81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{57E9D561-84AA-473D-AA4D-A07AF4C3F65F} = {BEB858F2-675A-4EC7-91AB-745A31228F6D}
@@ -88,5 +94,6 @@ Global
 		{41CEAF8A-D124-4FCE-BE95-A3C9963C0851} = {BEB858F2-675A-4EC7-91AB-745A31228F6D}
 		{4CFB876E-0298-4523-8DB7-DFBE5270276E} = {D76E85B2-264C-42F4-BBF4-08A5CE311E3E}
 		{7ED1D440-077A-4444-895F-6D36A9B94D45} = {D76E85B2-264C-42F4-BBF4-08A5CE311E3E}
+		{1A110E6C-0F0E-4B75-8E3A-B7681759EE81} = {BEB858F2-675A-4EC7-91AB-745A31228F6D}
 	EndGlobalSection
 EndGlobal

@@ -271,7 +271,7 @@
           "buildTransitive/netcoreapp2.0/Microsoft.Extensions.Primitives.targets": {}
         }
       },
-      "Scriban/6.0.0": {
+      "Scriban/5.7.0": {
         "type": "package",
         "compile": {
           "lib/net7.0/Scriban.dll": {
@@ -441,7 +441,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.3"
+          "Microsoft.Extensions.Logging.Abstractions": "7.0.0"
         },
         "compile": {
           "bin/placeholder/Pantheon.Framework.Core.dll": {}
@@ -454,8 +454,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.3",
-          "Pantheon.Framework.Core": "1.0.0"
+          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
+          "Pantheon.Framework.Core": "1.0.0",
+          "Pantheon.Framework.FlowQueue": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Pantheon.Framework.Executors.dll": {}
@@ -477,11 +478,24 @@
           "bin/placeholder/Pantheon.Framework.Flow.dll": {}
         }
       },
+      "Pantheon.Framework.FlowQueue/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Pantheon.Framework.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Pantheon.Framework.FlowQueue.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Pantheon.Framework.FlowQueue.dll": {}
+        }
+      },
       "Pantheon.Framework.LlmClient/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.3",
+          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
           "Pantheon.Framework.Core": "1.0.0"
         },
         "compile": {
@@ -508,9 +522,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.3",
+          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
           "Pantheon.Framework.Core": "1.0.0",
-          "Scriban": "6.0.0"
+          "Scriban": "5.7.0"
         },
         "compile": {
           "bin/placeholder/Pantheon.Framework.Template.dll": {}
@@ -960,10 +974,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Scriban/6.0.0": {
-      "sha512": "MZOtxtcehrCGiVwHpdcZQSe04Zy4IJfltVZdmlr1nFvSvEXnu50SWa7fonC0bqfMyTnNhQcY9BmEt882P129qw==",
+    "Scriban/5.7.0": {
+      "sha512": "sSjmrKmvin85FDVb2W63IDkUK5BgKY+ZnuCuwF8KRfcREB9f3dJZA58TgV052vzYxadlro4kAZv4jBP1tonaaQ==",
       "type": "package",
-      "path": "scriban/6.0.0",
+      "path": "scriban/5.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -974,10 +988,9 @@
         "lib/netstandard2.0/Scriban.dll",
         "lib/netstandard2.0/Scriban.xml",
         "readme.md",
-        "scriban.6.0.0.nupkg.sha512",
+        "scriban.5.7.0.nupkg.sha512",
         "scriban.nuspec",
         "scriban.png",
-        "src/Scriban/.editorconfig",
         "src/Scriban/Functions/ArrayFunctions.cs",
         "src/Scriban/Functions/BuiltinFunctions.cs",
         "src/Scriban/Functions/DateTimeFunctions.cs",
@@ -1035,7 +1048,6 @@
         "src/Scriban/Runtime/IScriptOutput.cs",
         "src/Scriban/Runtime/IScriptTransformable.cs",
         "src/Scriban/Runtime/ITemplateLoader.cs",
-        "src/Scriban/Runtime/JsonElementExtensions.cs",
         "src/Scriban/Runtime/MemberFilterDelegate.cs",
         "src/Scriban/Runtime/MemberRenamerDelegate.cs",
         "src/Scriban/Runtime/ScriptArray.cs",
@@ -1065,8 +1077,6 @@
         "src/Scriban/Syntax/Expressions/ScriptFunctionCall.cs",
         "src/Scriban/Syntax/Expressions/ScriptIncrementDecrementExpression.cs",
         "src/Scriban/Syntax/Expressions/ScriptIndexerExpression.cs",
-        "src/Scriban/Syntax/Expressions/ScriptInterpolatedExpression.cs",
-        "src/Scriban/Syntax/Expressions/ScriptInterpolatedStringExpression.cs",
         "src/Scriban/Syntax/Expressions/ScriptIsEmptyExpression.cs",
         "src/Scriban/Syntax/Expressions/ScriptLiteral.cs",
         "src/Scriban/Syntax/Expressions/ScriptMemberExpression.cs",
@@ -1534,6 +1544,11 @@
       "path": "../../src/Pantheon.Framework.Flow/Pantheon.Framework.Flow.csproj",
       "msbuildProject": "../../src/Pantheon.Framework.Flow/Pantheon.Framework.Flow.csproj"
     },
+    "Pantheon.Framework.FlowQueue/1.0.0": {
+      "type": "project",
+      "path": "../../src/Pantheon.Framework.FlowQueue/Pantheon.Framework.FlowQueue.csproj",
+      "msbuildProject": "../../src/Pantheon.Framework.FlowQueue/Pantheon.Framework.FlowQueue.csproj"
+    },
     "Pantheon.Framework.LlmClient/1.0.0": {
       "type": "project",
       "path": "../../src/Pantheon.Framework.LlmClient/Pantheon.Framework.LlmClient.csproj",
@@ -1557,6 +1572,7 @@
       "Pantheon.Framework.Core >= 1.0.0",
       "Pantheon.Framework.Executors >= 1.0.0",
       "Pantheon.Framework.Flow >= 1.0.0",
+      "Pantheon.Framework.FlowQueue >= 1.0.0",
       "Pantheon.Framework.LlmClient >= 1.0.0",
       "Pantheon.Framework.Storage >= 1.0.0",
       "Pantheon.Framework.Template >= 1.0.0"
@@ -1568,11 +1584,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/a6119261/Documents/git/dp/PantheonFramework/samples/SimpleSkill/SimpleSkill.csproj",
+      "projectUniqueName": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/samples/SimpleSkill/SimpleSkill.csproj",
       "projectName": "SimpleSkill",
-      "projectPath": "/Users/a6119261/Documents/git/dp/PantheonFramework/samples/SimpleSkill/SimpleSkill.csproj",
+      "projectPath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/samples/SimpleSkill/SimpleSkill.csproj",
       "packagesPath": "/Users/a6119261/.nuget/packages/",
-      "outputPath": "/Users/a6119261/Documents/git/dp/PantheonFramework/samples/SimpleSkill/obj/",
+      "outputPath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/samples/SimpleSkill/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/a6119261/.nuget/NuGet/NuGet.Config"
@@ -1588,23 +1604,26 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Core/Pantheon.Framework.Core.csproj": {
-              "projectPath": "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Core/Pantheon.Framework.Core.csproj"
+            "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Core/Pantheon.Framework.Core.csproj": {
+              "projectPath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Core/Pantheon.Framework.Core.csproj"
             },
-            "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Executors/Pantheon.Framework.Executors.csproj": {
-              "projectPath": "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Executors/Pantheon.Framework.Executors.csproj"
+            "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Executors/Pantheon.Framework.Executors.csproj": {
+              "projectPath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Executors/Pantheon.Framework.Executors.csproj"
             },
-            "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Flow/Pantheon.Framework.Flow.csproj": {
-              "projectPath": "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Flow/Pantheon.Framework.Flow.csproj"
+            "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Flow/Pantheon.Framework.Flow.csproj": {
+              "projectPath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Flow/Pantheon.Framework.Flow.csproj"
             },
-            "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.LlmClient/Pantheon.Framework.LlmClient.csproj": {
-              "projectPath": "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.LlmClient/Pantheon.Framework.LlmClient.csproj"
+            "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.FlowQueue/Pantheon.Framework.FlowQueue.csproj": {
+              "projectPath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.FlowQueue/Pantheon.Framework.FlowQueue.csproj"
             },
-            "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Storage/Pantheon.Framework.Storage.csproj": {
-              "projectPath": "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Storage/Pantheon.Framework.Storage.csproj"
+            "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.LlmClient/Pantheon.Framework.LlmClient.csproj": {
+              "projectPath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.LlmClient/Pantheon.Framework.LlmClient.csproj"
             },
-            "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Template/Pantheon.Framework.Template.csproj": {
-              "projectPath": "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Template/Pantheon.Framework.Template.csproj"
+            "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Storage/Pantheon.Framework.Storage.csproj": {
+              "projectPath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Storage/Pantheon.Framework.Storage.csproj"
+            },
+            "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Template/Pantheon.Framework.Template.csproj": {
+              "projectPath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Template/Pantheon.Framework.Template.csproj"
             }
           }
         }

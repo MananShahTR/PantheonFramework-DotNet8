@@ -106,4 +106,53 @@ namespace Pantheon.Framework.Core.Models
     /// Format for LLM responses
     /// </summary>
     public record ResponseFormat(string Type, Dictionary<string, object>? JsonSchema = null);
+
+    /// <summary>
+    /// Represents the result of a function call
+    /// </summary>
+    public class FunctionCallResult
+    {
+        /// <summary>
+        /// The name of the function that was called
+        /// </summary>
+        public string Name { get; }
+
+        /// <summary>
+        /// The arguments passed to the function
+        /// </summary>
+        public string Arguments { get; }
+
+        /// <summary>
+        /// Creates a new function call result
+        /// </summary>
+        /// <param name="name">The name of the function</param>
+        /// <param name="arguments">The arguments as a JSON string</param>
+        public FunctionCallResult(string name, string arguments)
+        {
+            Name = name;
+            Arguments = arguments;
+        }
+
+        /// <summary>
+        /// Creates a function call result from a response string
+        /// </summary>
+        /// <param name="response">The response to parse</param>
+        /// <returns>The function call result</returns>
+        public static FunctionCallResult FromResponse(string response)
+        {
+            // In a real implementation, this would parse JSON or a structured format
+            // For our mock implementation, we'll use a simple format
+            var parts = response.Split(new[] { "function_call:" }, StringSplitOptions.None);
+            if (parts.Length < 2)
+            {
+                return new FunctionCallResult("unknown", "{}");
+            }
+
+            var functionParts = parts[1].Trim().Split(new[] { "\narguments:" }, StringSplitOptions.None);
+            var name = functionParts[0].Trim();
+            var arguments = functionParts.Length > 1 ? functionParts[1].Trim() : "{}";
+
+            return new FunctionCallResult(name, arguments);
+        }
+    }
 }

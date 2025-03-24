@@ -7,15 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Pantheon.Framework.Core\Pantheon.Framework.Core.csproj" />
     <ProjectReference Include="..\Pantheon.Framework.Executors\Pantheon.Framework.Executors.csproj" />
     <ProjectReference Include="..\Pantheon.Framework.Storage\Pantheon.Framework.Storage.csproj" />
+    <ProjectReference Include="..\Pantheon.Framework.FlowQueue\Pantheon.Framework.FlowQueue.csproj" />
+    <ProjectReference Include="..\Pantheon.Framework.Flow\Pantheon.Framework.Flow.csproj" />
+    <ProjectReference Include="..\Pantheon.Framework.Template\Pantheon.Framework.Template.csproj" />
+    <ProjectReference Include="..\Pantheon.Framework.LlmClient\Pantheon.Framework.LlmClient.csproj" />
   </ItemGroup>
 
 </Project>

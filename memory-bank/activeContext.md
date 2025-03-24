@@ -14,13 +14,16 @@ The current focus is on improving the framework's handling of generic types in f
 1. **Complete Generic Type Support**: Ensure consistent handling of generic types across all components.
 2. **Enhance Error Handling**: Improve error handling and reporting in flow execution.
 3. **Add More LLM Providers**: Implement additional LLM client providers beyond the mock implementation.
-4. **Expand Test Coverage**: Increase unit and integration test coverage for core components.
-5. **API Documentation**: Add comprehensive API documentation using standard .NET documentation tools.
-6. **Performance Optimization**: Identify and optimize performance bottlenecks in flow execution.
+4. **Implement Additional Queue Types**: Develop other queue implementations (Redis, etc.) for flow management.
+5. **Expand Test Coverage**: Increase unit and integration test coverage for core components.
+6. **API Documentation**: Add comprehensive API documentation using standard .NET documentation tools.
+7. **Performance Optimization**: Identify and optimize performance bottlenecks in flow execution.
 
 ## Active Decisions and Considerations
 1. **Generic Type Constraints**: Working through the implications of generic type constraints on flow execution and API controllers.
 2. **Serialization Strategy**: Determining the best approach for serializing and deserializing flow state, especially with complex nested objects.
 3. **Error Propagation**: Deciding how errors should be propagated and handled throughout the flow execution process.
-4. **API Design**: Refining the API design to ensure it remains intuitive while supporting complex flow definitions.
-5. **Extensibility Points**: Identifying key points where extensibility should be prioritized to support diverse use cases.
+4. **Queue Management**: Determining the best approach for flow queue management and handling expired flows.
+5. **API Design**: Refining the API design to ensure it remains intuitive while supporting complex flow definitions.
+6. **Extensibility Points**: Identifying key points where extensibility should be prioritized to support diverse use cases.
+7. **Concurrency Control**: Managing concurrent flow execution through queuing and throttling mechanisms.

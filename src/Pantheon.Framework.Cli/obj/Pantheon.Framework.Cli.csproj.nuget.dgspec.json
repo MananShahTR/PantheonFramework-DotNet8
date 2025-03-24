@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Cli/Pantheon.Framework.Cli.csproj": {}
+    "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Cli/Pantheon.Framework.Cli.csproj": {}
   },
   "projects": {
-    "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Cli/Pantheon.Framework.Cli.csproj": {
+    "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Cli/Pantheon.Framework.Cli.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Cli/Pantheon.Framework.Cli.csproj",
+        "projectUniqueName": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Cli/Pantheon.Framework.Cli.csproj",
         "projectName": "Pantheon.Framework.Cli",
-        "projectPath": "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Cli/Pantheon.Framework.Cli.csproj",
+        "projectPath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Cli/Pantheon.Framework.Cli.csproj",
         "packagesPath": "/Users/a6119261/.nuget/packages/",
-        "outputPath": "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Cli/obj/",
+        "outputPath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Cli/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/a6119261/.nuget/NuGet/NuGet.Config"

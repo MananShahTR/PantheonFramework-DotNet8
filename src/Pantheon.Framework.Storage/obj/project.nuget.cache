@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "z5OES8W9sO1i2WsefToJsE6JAwuatkxps6bjmkmZe+pcuabtUUJJdWgoaXZxBAyXeNuwxz3WSSZSq7+8Ij+5tA==",
+  "dgSpecHash": "lRB0G7wRfJMPdc1jfWowdCy4S9S+KWHIj3Flul2cH2jzgdisULxnrcPtZpzVNJt1jf2Eq3XTfcLo5IewwYHjzg==",
   "success": true,
-  "projectFilePath": "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Storage/Pantheon.Framework.Storage.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Storage/Pantheon.Framework.Storage.csproj",
+  "expectedPackageFiles": [
+    "/Users/a6119261/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.0/microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

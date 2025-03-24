@@ -1,15 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "fHxApUJy+I/ml7BszYOVdkusiY5c41NA7y0R9PjZyel0VfKMshgJqWZzKKVwmZYcyUBLa/Biw5wfJKaRp6wKWQ==",
+  "dgSpecHash": "tj9du8sQnNMqeaSwkIyZHy5w1y197tPg533gxWhfIGKI2XB1eeedBhMUUzHTXwi+pNjGhM96HSUy3mag/A52wA==",
   "success": true,
-  "projectFilePath": "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.LlmClient/Pantheon.Framework.LlmClient.csproj",
+  "projectFilePath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.LlmClient/Pantheon.Framework.LlmClient.csproj",
   "expectedPackageFiles": [
-    "/Users/a6119261/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.3/microsoft.extensions.dependencyinjection.abstractions.9.0.3.nupkg.sha512",
-    "/Users/a6119261/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.3/microsoft.extensions.logging.abstractions.9.0.3.nupkg.sha512",
-    "/Users/a6119261/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
-    "/Users/a6119261/.nuget/packages/system.diagnostics.diagnosticsource/9.0.3/system.diagnostics.diagnosticsource.9.0.3.nupkg.sha512",
-    "/Users/a6119261/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
-    "/Users/a6119261/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "/Users/a6119261/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.0/microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,8 +9,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Pantheon.Framework.Core.Interfaces;
+using Pantheon.Framework.Core.Models;
 using Pantheon.Framework.Executors;
+using Pantheon.Framework.Flow;
+using Pantheon.Framework.FlowQueue;
 using Pantheon.Framework.Storage;
+using Pantheon.Framework.Api.Flows;
 
 namespace Pantheon.Framework.Api
 {
@@ -34,16 +40,41 @@ namespace Pantheon.Framework.Api
 
             // Register flow storage as a singleton
             services.AddSingleton<IFlowStorage, InMemoryFlowStorage>();
+            
+            // Register flow queue as a singleton
+            services.AddSingleton<IFlowQueue>(provider => 
+            {
+                // Configure the visibility timeout (how long before a flow is considered stalled)
+                int visibilityTimeoutSeconds = Configuration.GetValue<int>("FlowQueue:VisibilityTimeoutSeconds", 30);
+                var logger = provider.GetRequiredService<ILogger<InMemoryFlowQueue>>();
+                return new InMemoryFlowQueue(visibilityTimeoutSeconds, logger);
+            });
 
             // Register executor as a singleton with an empty flow dictionary
             // In a real application, you would add flows to this dictionary
             services.AddSingleton<IExecutor>(provider =>
             {
                 var flowStorage = provider.GetRequiredService<IFlowStorage>();
-                var logger = provider.GetRequiredService<ILogger<InMemoryExecutor>>();
-                var flows = new Dictionary<string, IFlow<object, object, object>>();
+                var flowQueue = provider.GetRequiredService<IFlowQueue>();
+                var loggerExecutor = provider.GetRequiredService<ILogger<QueuedExecutor>>();
                 
-                return new InMemoryExecutor(flowStorage, flows, logger);
+                // Create sample flows for testing
+                var echoFlow = new EchoFlow(provider.GetRequiredService<ILogger<EchoFlow>>());
+                var simpleEchoFlow = new SimpleEchoFlow(provider.GetRequiredService<ILogger<SimpleEchoFlow>>());
+                var debugFlow = new DebugFlow(provider.GetRequiredService<ILogger<DebugFlow>>());
+                
+                // Register the flows
+                var flows = new Dictionary<string, IFlow<object, object, object>>
+                {
+                    { "echo", echoFlow },
+                    { "simple-echo", simpleEchoFlow },
+                    { "debug", debugFlow }
+                };
+                
+                // Configure the maximum number of concurrent flows
+                int maxConcurrentFlows = Configuration.GetValue<int>("FlowQueue:MaxConcurrentFlows", 5);
+                
+                return new QueuedExecutor(flowStorage, flowQueue, flows, maxConcurrentFlows, loggerExecutor);
             });
 
             // Add CORS
@@ -77,12 +108,13 @@ namespace Pantheon.Framework.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            // Enable Swagger
+            // Enable Swagger - some versions might cause issues due to compatibility
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pantheon Framework API v1");
-                c.RoutePrefix = string.Empty; // Serve the Swagger UI at the root
+                // Use swagger as the route prefix
+                c.RoutePrefix = "swagger";
             });
 
             app.UseRouting();

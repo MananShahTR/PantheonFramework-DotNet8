@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "B3n4GodmXLbLb/FDs7yWfaOGc+KosYuHTz71XcYP8BQ3pJvaMxBw3RrqBEwkvbDYSddCSOHnAQRqrfqluhFOfw==",
+  "dgSpecHash": "OEdc5Xk0u0OlbiAYkzgzx3QtYniuF9HCzIHghwQDKbJjCaJWGFActmSQV/lDyAtoIVQ7503nQbs6M1Hj9rcsSA==",
   "success": true,
-  "projectFilePath": "/Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.Cli/Pantheon.Framework.Cli.csproj",
+  "projectFilePath": "/Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.Cli/Pantheon.Framework.Cli.csproj",
   "expectedPackageFiles": [
     "/Users/a6119261/.nuget/packages/microsoft.bcl.asyncinterfaces/9.0.3/microsoft.bcl.asyncinterfaces.9.0.3.nupkg.sha512",
     "/Users/a6119261/.nuget/packages/microsoft.extensions.configuration/9.0.3/microsoft.extensions.configuration.9.0.3.nupkg.sha512",

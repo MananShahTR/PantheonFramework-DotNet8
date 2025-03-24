@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Pantheon.Framework.Core.Interfaces;
@@ -49,8 +50,59 @@ namespace Pantheon.Framework.LlmClient
         /// <summary>
         /// Default function to determine the response for a chat completion request
         /// </summary>
-        public static string DefaultChatCompletionResponseFunc(LlmChatCompletionRequest request) =>
-            $"This is a mock response to a chat with {request.Messages.Count} messages";
+        public static string DefaultChatCompletionResponseFunc(LlmChatCompletionRequest request)
+        {
+            // If functions are provided, generate a function call response
+            if (request.Functions != null && request.Functions.Count > 0)
+            {
+                var function = request.Functions[0];
+                
+                // If a specific function is requested, use that instead
+                if (!string.IsNullOrEmpty(request.FunctionCall) && 
+                    request.Functions.Exists(f => f.Name == request.FunctionCall))
+                {
+                    function = request.Functions.Find(f => f.Name == request.FunctionCall);
+                }
+                
+                return GenerateFunctionCallResponse(function);
+            }
+
+            // If response format is specified as JSON, return a JSON structure
+            if (request.ResponseFormat?.Type == "json")
+            {
+                return "{\"message\": \"This is a mock JSON response\", \"count\": 42}";
+            }
+
+            return $"This is a mock response to a chat with {request.Messages.Count} messages";
+        }
+
+        /// <summary>
+        /// Generate a function call response for the specified function
+        /// </summary>
+        private static string GenerateFunctionCallResponse(LlmChatMlFunction? function)
+        {
+            // Handle null function gracefully
+            if (function == null)
+            {
+                return "function_call: unknown\narguments: {}";
+            }
+            
+            // Create a simple mock response for the function
+            var mockArgs = new Dictionary<string, object>();
+            
+            // Add some default arguments based on the function parameters
+            if (function.Parameters != null)
+            {
+                foreach (var param in function.Parameters)
+                {
+                    // Add a mock value based on the parameter name
+                    mockArgs[param.Key] = $"mock-value-for-{param.Key}";
+                }
+            }
+
+            string args = JsonSerializer.Serialize(mockArgs);
+            return $"function_call: {function.Name}\narguments: {args}";
+        }
 
         /// <inheritdoc />
         public Task<LlmResponse> CompletionAsync(LlmCompletionRequest request)

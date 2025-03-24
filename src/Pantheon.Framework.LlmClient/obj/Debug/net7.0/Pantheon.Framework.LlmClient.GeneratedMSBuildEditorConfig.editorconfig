@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Pantheon.Framework.LlmClient
-build_property.ProjectDir = /Users/a6119261/Documents/git/dp/PantheonFramework/src/Pantheon.Framework.LlmClient/
+build_property.ProjectDir = /Users/a6119261/Documents/git/PantheonFrameworks/PantheonFramework-DotNet8/src/Pantheon.Framework.LlmClient/

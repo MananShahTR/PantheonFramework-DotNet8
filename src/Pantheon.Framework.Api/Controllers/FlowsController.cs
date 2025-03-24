@@ -39,8 +39,9 @@ namespace Pantheon.Framework.Api.Controllers
                 string inputJson = inputData.GetRawText();
                 _logger.LogInformation("Submitting flow {FlowName} with input {Input}", flowName, inputJson);
 
-                // Submit the flow
-                Guid flowRunId = await _executor.SubmitFlowAsync(flowName, inputData, userId);
+            // Submit the flow - need to wrap JsonElement in a reference type
+            var inputWrapper = new InputWrapper(inputData);
+            Guid flowRunId = await _executor.SubmitFlowAsync(flowName, inputWrapper, userId);
 
                 // Return the flow run ID
                 var responseUrl = $"/api/flows/{flowRunId}";
@@ -192,5 +193,21 @@ namespace Pantheon.Framework.Api.Controllers
         public Guid Id { get; set; }
         public FlowRunStatus Status { get; set; }
         public Dictionary<string, string> Links { get; set; } = new Dictionary<string, string>();
+    }
+
+    /// <summary>
+    /// Wrapper class for JsonElement to satisfy the 'class' constraint for generic types
+    /// </summary>
+    public class InputWrapper
+    {
+        public JsonElement Data { get; }
+
+        public InputWrapper(JsonElement data)
+        {
+            Data = data;
+        }
+
+        // Conversion operators to make it easier to work with
+        public static implicit operator JsonElement(InputWrapper wrapper) => wrapper.Data;
     }
 }
