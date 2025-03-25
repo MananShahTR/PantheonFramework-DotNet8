@@ -9,6 +9,7 @@ The current focus is on improving the framework's handling of generic types in f
 3. **Added GenericFlowAdapter**: Implemented GenericFlowAdapter to fix casting errors in the SimpleSkill sample.
 4. **Repository Structure Setup**: Set up initial repository structure and added .gitignore for .NET projects.
 5. **Memory Bank Creation**: Established the Memory Bank documentation structure to track project knowledge.
+6. **Git Tracking Cleanup**: Removed bin and obj directories from Git tracking to ensure compiled files are not pushed to remote repositories, in compliance with .gitignore rules.
 
 ## Next Steps
 1. **Complete Generic Type Support**: Ensure consistent handling of generic types across all components.

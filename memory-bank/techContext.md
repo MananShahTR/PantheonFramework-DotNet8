@@ -38,6 +38,16 @@ Pantheon.Framework/
     └── Pantheon.Framework.Integration.Tests/  # Integration tests
 ```
 
+### Source Control Configuration
+- **.gitignore**: Configured to exclude standard .NET build artifacts:
+  - `bin/` and `obj/` directories (containing compiled files)
+  - User-specific files (`.suo`, `.user`, etc.)
+  - Build results (`Debug/`, `Release/`, etc.)
+  - Visual Studio / Rider temporary files (`.vs/`, `.idea/`)
+- **Commit Practices**: 
+  - Compiled files (`bin/` and `obj/` directories) should never be committed to the repository
+  - Only source code, project files, and necessary configuration files should be tracked
+
 ## Technical Constraints
 
 1. **Platform Compatibility**: Designed to work cross-platform (Windows, Linux, macOS)
